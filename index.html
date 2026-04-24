@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ExploreDYCI</title>
+  <link rel="icon" type="image/png" href="static/images/dyci-logo.webp">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-polylinedecorator/dist/leaflet.polylineDecorator.min.js"></script>
+  <link rel="stylesheet" href="static/css/styles.css">
+  <script defer src="static/js/script.js"></script>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     MAP
+══════════════════════════════════════════════════════════ -->
+<div id="map"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     TOP-LEFT UI ROOT
+══════════════════════════════════════════════════════════ -->
+<div id="ui-root">
+
+  <!-- SEARCH PANEL (default) -->
+  <div id="search-panel" class="glass">
+    <div class="search-row">
+      <span class="search-icon">
+      <img src="static/images/dyci-logo.webp">
+      </span>
+      <input id="search-input" type="text" placeholder="Search ExploreDYCI" autocomplete="off" spellcheck="false">
+      <button id="search-clear" aria-label="Clear search">✕</button>
+    </div>
+    <div id="search-suggestions" class="suggestions-list hidden"></div>
+  </div>
+
+  <!-- DIRECTIONS PANEL -->
+  <div id="directions-panel" class="glass hidden">
+    <div class="dir-header">
+      <button id="btn-back" title="Back">←</button>
+      <span class="dir-header-title">Get directions</span>
+    </div>
+    <div class="dir-inputs">
+      <div class="dir-input-row">
+        <span class="dir-dot start"></span>
+        <input id="origin-input" class="dir-input-field" type="text" placeholder="Choose starting point…" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="dir-line-connector" style="margin-left:4px;"></div>
+      <div class="dir-input-row">
+        <span class="dir-dot end"></span>
+        <input id="dest-input" class="dir-input-field" type="text" placeholder="Destination" autocomplete="off" spellcheck="false" readonly>
+      </div>
+    </div>
+    <div id="origin-suggestions"  class="dir-suggestions hidden"></div>
+    <div id="dest-suggestions"    class="dir-suggestions hidden"></div>
+    <div id="route-status"></div>
+    <div class="dir-actions">
+      <button id="btn-swap" title="Swap">⇅</button>
+      <button id="btn-search-route">Get Route</button>
+    </div>
+  </div>
+
+</div><!-- /ui-root -->
+
+<!-- ══════════════════════════════════════════════════════════
+     SIDEBAR  (detail view)
+══════════════════════════════════════════════════════════ -->
+<div id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title" id="sidebar-name">—</div>
+    <button id="sidebar-close" title="Close">✕</button>
+  </div>
+  <div class="sidebar-body">
+    <div id="sidebar-chips"></div>
+  </div>
+  <div class="sidebar-footer">
+    <button id="btn-directions">Directions ›</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     CATEGORY BAR
+══════════════════════════════════════════════════════════ -->
+<div id="category-bar">
+  <button class="cat-btn active" data-type="all">All</button>
+  <button class="cat-btn" data-type="office"><img src="static/images/office-icon.svg" alt="">Office</button>
+  <button class="cat-btn" data-type="classroom"><img src="static/images/room-icon.svg" alt="">Rooms</button>
+  <button class="cat-btn" data-type="cr"><img src="static/images/cr-icon.svg" alt="">CR</button>
+  <button class="cat-btn" data-type="utility"><img src="static/images/utility-icon.svg" alt="">Utility</button>
+  <button class="cat-btn" data-type="facility"><img src="static/images/facility-icon.svg" alt="">Facilities</button>
+  <button class="cat-btn" data-type="lab"><img src="static/images/lab-icon.svg" alt="">Lab</button>
+  <button class="cat-btn" data-type="canteen"><img src="static/images/canteen-icon.svg" alt="">Canteen</button>
+  <button class="cat-btn" data-type="na">N/A</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     CLICK HINT
+══════════════════════════════════════════════════════════ -->
+<div id="click-hint" class="hidden">Click on the map to set your starting point</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════════════════════ -->
+</body>
+</html>
